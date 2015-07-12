@@ -33,6 +33,7 @@ interact('#main-view')
       context: ctx,
     })
 
+    ctx.clearRect(0, 0, event.target.width, event.target.height)
     ctx.save()
     ctx.scale(pixelSize, pixelSize)
     render(map)

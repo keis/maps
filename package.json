@@ -1,10 +1,15 @@
 {
+  "scripts": {
+    "test": "tape test/unit/*"
+  },
   "devDependencies": {
-    "browserify": "^10.2.4"
+    "browserify": "^10.2.4",
+    "tape": "^4.0.0"
   },
   "dependencies": {
     "component-find": "^1.0.0",
     "interact.js": "^1.2.4",
-    "object-assign": "^3.0.0"
+    "object-assign": "^3.0.0",
+    "rotate-array": "^1.0.0"
   }
 }
