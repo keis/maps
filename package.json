@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "component-find": "^1.0.0",
+    "gl-vec2": "^1.0.0",
     "interact.js": "^1.2.4",
     "object-assign": "^3.0.0",
     "rotate-array": "^1.0.0"
