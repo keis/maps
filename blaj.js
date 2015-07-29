@@ -1,4 +1,4 @@
-var arrow = require('./lib/arrow')
+var arrow = require('canvas-arrow-path')
 
 setTimeout(function () {
   var canvas = document.getElementById('main-view')
