@@ -27,7 +27,7 @@ interact('#main-view')
     var ctx = event.target.getContext('2d')
       , pos = snap(event.pageX, event.pageY)
 
-    map.update({x: pos.x / pixelSize, y: pos.y / pixelSize}, {brush: 'open'})
+    map.update([pos.x / pixelSize, pos.y / pixelSize], {brush: 'open'})
 
     render = createRenderer({
       context: ctx,
