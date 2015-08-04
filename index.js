@@ -1,19 +1,14 @@
-var interact = require('interact.js')
-  , Map = require('./lib/map')
-  , createRenderer = require('./lib/render')
-  , pixelSize = 64
-  , snap
-  , map
-  , render
+import interact from 'interact.js'
+import Map from './lib/map'
+import createRenderer from './lib/render'
 
-require('./lib/render')
+let pixelSize = 64
 
-map = new Map({})
-snap = interact.createSnapGrid({
+let map = new Map({})
+let snap = interact.createSnapGrid({
   x: pixelSize,
   y: pixelSize
 })
-
 
 interact('#main-view')
   .origin('self')
@@ -24,14 +19,11 @@ interact('#main-view')
     maxPerElement: Infinity
   })
   .on('tap', function (event) {
-    var ctx = event.target.getContext('2d')
+    let ctx = event.target.getContext('2d')
       , pos = snap(event.pageX, event.pageY)
+      , render = createRenderer({ context: ctx })
 
     map.update([pos.x / pixelSize, pos.y / pixelSize], {brush: 'open'})
-
-    render = createRenderer({
-      context: ctx,
-    })
 
     ctx.clearRect(0, 0, event.target.width, event.target.height)
     ctx.save()

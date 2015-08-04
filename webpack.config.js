@@ -1,6 +1,7 @@
 var webpack = require('webpack')
 
 module.exports = {
+  devtool: 'eval',
   entry: './index.js',
   output: {
     filename: 'bundle.js'
@@ -15,5 +16,12 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
-  ]
+  ],
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      loaders: ['babel'],
+      exclude: /node_modules/
+    }]
+  }
 }
