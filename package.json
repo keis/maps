@@ -1,13 +1,13 @@
 {
   "scripts": {
     "test": "tape test/unit/*",
-    "start": "beefy index.js --live"
+    "start": "webpack-dev-server"
   },
   "devDependencies": {
-    "beefy": "^2.1.5",
     "bound-points": "^1.0.0",
-    "browserify": "^10.2.4",
-    "tape": "^4.0.0"
+    "tape": "^4.0.0",
+    "webpack": "^1.10.5",
+    "webpack-dev-server": "^1.10.1"
   },
   "dependencies": {
     "canvas-arrow-path": "^1.0.0",
