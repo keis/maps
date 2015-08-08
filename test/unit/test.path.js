@@ -130,13 +130,3 @@ test('overlap all but one', function (t) {
   // check bounding box
   t.deepEqual(boundingBox(path), { top: 4, left: 4, right: 7, bottom: 6})
 })
-
-test('joining paths', function (t) {
-  let a = [ [ 4, 4 ], [ 5, 4 ], [ 5, 5 ], [ 4, 5 ], [ 4, 4 ] ]
-    , b = [ [ 4, 5 ], [ 5, 5 ], [ 5, 6 ], [ 4, 6 ], [ 4, 5 ] ]
-
-  joinPath(a, 3, b, 1)
-
-  t.plan(1)
-  t.equal(a.length, 7)
-})
