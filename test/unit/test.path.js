@@ -1,6 +1,6 @@
-var test = require('tape')
-  , getBounds = require('bound-points')
-  , asPaths = require('../../lib/path')
+import test from 'tape'
+import getBounds from 'bound-points'
+import asPaths, {joinPath} from '../../lib/path'
 
 function rightAngles(t, nodes) {
   var prev = nodes[0]
@@ -43,7 +43,7 @@ test('borders of single tile', function (t) {
 })
 
 test('two adjacent tiles - y', function (t) {
-  var tiles = [ [4, 4], [4, 5] ]
+  var tiles = [ [4.5, 4.5], [4.5, 5.5] ]
     , paths = asPaths(tiles)
     , path
 
@@ -60,7 +60,7 @@ test('two adjacent tiles - y', function (t) {
   t.deepEqual(path[0], path[path.length-1])
 
   // check bounding box
-  t.deepEqual(boundingBox(path), { top: 3.5, left: 3.5, right: 4.5, bottom: 5.5})
+  t.deepEqual(boundingBox(path), { top: 4, left: 4, right: 5, bottom: 6})
 })
 
 test('two adjacent tiles - x', function (t) {
@@ -85,7 +85,7 @@ test('two adjacent tiles - x', function (t) {
 })
 
 test('joining disjoint paths', function (t) {
-  var tiles = [ [4, 4], [4, 6], [4, 5]]
+  var tiles = [ [4, 4], [4, 6], [4, 5] ]
     , paths = asPaths(tiles)
     , path
 
@@ -103,4 +103,40 @@ test('joining disjoint paths', function (t) {
 
   // check bounding box
   t.deepEqual(boundingBox(path), { top: 3.5, left: 3.5, right: 4.5, bottom: 6.5})
+})
+
+test('overlap all but one', function (t) {
+  // 1 6 5
+  // 2 3 4
+
+  // [5, 4] => [5, 5]
+
+  var tiles = [ [4.5, 4.5], [4.5, 5.5], [5.5, 5.5], [6.5, 5.5], [6.5, 4.5], [5.5, 4.5] ]
+    , paths = asPaths(tiles)
+    , path
+
+  t.plan(8)
+  t.equal(paths.length, 1, 'number of paths')
+
+  path = paths[0]
+  t.equal(path.length, 5, 'length of path')
+
+  // ensure right angles
+  rightAngles(t, path)
+
+  // ensure the path is a loop
+  t.deepEqual(path[0], path[path.length-1])
+
+  // check bounding box
+  t.deepEqual(boundingBox(path), { top: 4, left: 4, right: 7, bottom: 6})
+})
+
+test('joining paths', function (t) {
+  let a = [ [ 4, 4 ], [ 5, 4 ], [ 5, 5 ], [ 4, 5 ], [ 4, 4 ] ]
+    , b = [ [ 4, 5 ], [ 5, 5 ], [ 5, 6 ], [ 4, 6 ], [ 4, 5 ] ]
+
+  joinPath(a, 3, b, 1)
+
+  t.plan(1)
+  t.equal(a.length, 7)
 })
