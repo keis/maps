@@ -18,6 +18,8 @@
     "canvas-cave-path": "^1.0.1",
     "component-find": "^1.0.0",
     "interact.js": "^1.2.4",
-    "object-assign": "^3.0.0"
+    "object-assign": "^3.0.0",
+    "redux": "^1.0.0-rc",
+    "redux-thunk": "^0.1.0"
   }
 }
