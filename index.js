@@ -12,6 +12,18 @@ let snap = interact.createSnapGrid({
   y: pixelSize
 })
 
+map.subscribe(function () {
+  let canvas = document.getElementById('main-view')
+    , ctx = canvas.getContext('2d')
+    , render = createRenderer({ context: ctx })
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  ctx.save()
+  ctx.scale(pixelSize, pixelSize)
+  render(map)
+  ctx.restore()
+})
+
 interact('#main-view')
   .origin('self')
   .draggable({
@@ -21,15 +33,7 @@ interact('#main-view')
     maxPerElement: Infinity
   })
   .on('tap', function (event) {
-    let ctx = event.target.getContext('2d')
-      , pos = snap(event.pageX, event.pageY)
-      , render = createRenderer({ context: ctx })
+    let pos = snap(event.pageX, event.pageY)
 
     map.dispatch(toggle(pos.x / pixelSize, pos.y / pixelSize))
-
-    ctx.clearRect(0, 0, event.target.width, event.target.height)
-    ctx.save()
-    ctx.scale(pixelSize, pixelSize)
-    render(map)
-    ctx.restore()
   })
