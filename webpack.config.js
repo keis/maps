@@ -2,7 +2,7 @@ var webpack = require('webpack')
 
 module.exports = {
   devtool: 'eval',
-  entry: './index.js',
+  entry: ['webpack/hot/only-dev-server', './index'],
   output: {
     filename: 'bundle.js'
   },
