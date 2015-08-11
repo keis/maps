@@ -1,39 +1,12 @@
-import interact from 'interact.js'
+import React from 'react'
 import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
-import { reduce, brush, clear, toggle } from './lib/map'
-import createRenderer from './lib/render'
+import Editor from './lib/editor'
+import { reduce } from './lib/map'
 
-let pixelSize = 64
+let store = applyMiddleware(thunk)(createStore)(reduce)
 
-let map = applyMiddleware(thunk)(createStore)(reduce)
-let snap = interact.createSnapGrid({
-  x: pixelSize,
-  y: pixelSize
-})
-
-map.subscribe(function () {
-  let canvas = document.getElementById('main-view')
-    , ctx = canvas.getContext('2d')
-    , render = createRenderer({ context: ctx })
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
-  ctx.save()
-  ctx.scale(pixelSize, pixelSize)
-  render(map)
-  ctx.restore()
-})
-
-interact('#main-view')
-  .origin('self')
-  .draggable({
-    snap: {
-      targets: [snap]
-    },
-    maxPerElement: Infinity
-  })
-  .on('tap', function (event) {
-    let pos = snap(event.pageX, event.pageY)
-
-    map.dispatch(toggle(pos.x / pixelSize, pos.y / pixelSize))
-  })
+React.render(React.createElement(Provider, {store},
+                                 () => React.createElement(Editor)),
+             document.getElementById('app'))
