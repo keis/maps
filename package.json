@@ -1,6 +1,7 @@
 {
   "scripts": {
     "test": "babel-tape-runner test/unit/*",
+    "coverage": "istanbul cover babel-tape-runner test/unit/*",
     "start": "webpack-dev-server"
   },
   "devDependencies": {
@@ -8,6 +9,8 @@
     "babel-loader": "^5.3.2",
     "babel-tape-runner": "^1.1.0",
     "bound-points": "^1.0.0",
+    "coveralls": "^2.11.4",
+    "istanbul": "^0.3.18",
     "react-hot-loader": "^1.2.8",
     "tape": "^4.0.0",
     "webpack": "^1.10.5",
