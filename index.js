@@ -19,6 +19,7 @@ React.render(
     React.createElement(Provider, {store},
                         () => React.createElement(Editor)),
     React.createElement(DebugPanel, {top: true, right: true, bottom: true},
-                        React.createElement(DevTools, {store, monitor: LogMonitor})),
+                        React.createElement(DevTools,
+                                            {store, monitor: LogMonitor}))
   ),
   document.getElementById('app'))
