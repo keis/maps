@@ -1,33 +1,34 @@
 import test from 'tape'
 import getBounds from 'bound-points'
-import asPaths, {joinPath} from '../../lib/path'
+import asPaths from '../../lib/path'
 
-function rightAngles(t, nodes) {
+function rightAngles (t, nodes) {
   var prev = nodes[0]
-    , node
-    , i
+  var node
+  var i
 
   for (i = 1; i < nodes.length; i++) {
     node = nodes[i]
-    t.ok(prev[0] == node[0] || prev[1] == node[1], 'straight angle')
+    t.ok(prev[0] === node[0] || prev[1] === node[1], 'straight angle')
     prev = node
   }
 }
 
-function boundingBox(nodes) {
-  var bounds = getBounds(nodes)
+function boundingBox (nodes) {
+  const bounds = getBounds(nodes)
 
-  return { left: bounds[0][0]
-         , top:  bounds[0][1]
-         , right: bounds[1][0]
-         , bottom: bounds[1][1]
-         }
+  return {
+    left: bounds[0][0],
+    top: bounds[0][1],
+    right: bounds[1][0],
+    bottom: bounds[1][1]
+  }
 }
 
 test('borders of single tile', function (t) {
-  var tiles = [[4, 4]]
-    , paths = asPaths(tiles)
-    , path
+  const tiles = [[4, 4]]
+  const paths = asPaths(tiles)
+  var path
 
   t.plan(7)
   t.equal(paths.length, 1, 'number of paths')
@@ -39,13 +40,13 @@ test('borders of single tile', function (t) {
   rightAngles(t, path)
 
   // ensure the path is a loop
-  t.deepEqual(path[0], path[path.length-1])
+  t.deepEqual(path[0], path[path.length - 1])
 })
 
 test('two adjacent tiles - y', function (t) {
-  var tiles = [ [4.5, 4.5], [4.5, 5.5] ]
-    , paths = asPaths(tiles)
-    , path
+  const tiles = [ [4.5, 4.5], [4.5, 5.5] ]
+  const paths = asPaths(tiles)
+  var path
 
   t.plan(8)
   t.equal(paths.length, 1, 'number of paths')
@@ -57,16 +58,16 @@ test('two adjacent tiles - y', function (t) {
   rightAngles(t, path)
 
   // ensure the path is a loop
-  t.deepEqual(path[0], path[path.length-1])
+  t.deepEqual(path[0], path[path.length - 1])
 
   // check bounding box
-  t.deepEqual(boundingBox(path), { top: 4, left: 4, right: 5, bottom: 6})
+  t.deepEqual(boundingBox(path), { top: 4, left: 4, right: 5, bottom: 6 })
 })
 
 test('two adjacent tiles - x', function (t) {
-  var tiles = [ [4, 4], [5, 4] ]
-    , paths = asPaths(tiles)
-    , path
+  const tiles = [ [4, 4], [5, 4] ]
+  const paths = asPaths(tiles)
+  var path
 
   t.plan(8)
   t.equal(paths.length, 1, 'number of paths')
@@ -78,16 +79,16 @@ test('two adjacent tiles - x', function (t) {
   rightAngles(t, path)
 
   // ensure the path is a loop
-  t.deepEqual(path[0], path[path.length-1])
+  t.deepEqual(path[0], path[path.length - 1])
 
   // check bounding box
-  t.deepEqual(boundingBox(path), { top: 3.5, left: 3.5, right: 5.5, bottom: 4.5})
+  t.deepEqual(boundingBox(path), { top: 3.5, left: 3.5, right: 5.5, bottom: 4.5 })
 })
 
 test('joining disjoint paths', function (t) {
-  var tiles = [ [4, 4], [4, 6], [4, 5] ]
-    , paths = asPaths(tiles)
-    , path
+  const tiles = [ [4, 4], [4, 6], [4, 5] ]
+  const paths = asPaths(tiles)
+  var path
 
   t.plan(8)
   t.equal(paths.length, 1, 'number of paths')
@@ -99,10 +100,10 @@ test('joining disjoint paths', function (t) {
   rightAngles(t, path)
 
   // ensure the path is a loop
-  t.deepEqual(path[0], path[path.length-1])
+  t.deepEqual(path[0], path[path.length - 1])
 
   // check bounding box
-  t.deepEqual(boundingBox(path), { top: 3.5, left: 3.5, right: 4.5, bottom: 6.5})
+  t.deepEqual(boundingBox(path), { top: 3.5, left: 3.5, right: 4.5, bottom: 6.5 })
 })
 
 test('overlap all but one', function (t) {
@@ -111,9 +112,9 @@ test('overlap all but one', function (t) {
 
   // [5, 4] => [5, 5]
 
-  var tiles = [ [4.5, 4.5], [4.5, 5.5], [5.5, 5.5], [6.5, 5.5], [6.5, 4.5], [5.5, 4.5] ]
-    , paths = asPaths(tiles)
-    , path
+  const tiles = [ [4.5, 4.5], [4.5, 5.5], [5.5, 5.5], [6.5, 5.5], [6.5, 4.5], [5.5, 4.5] ]
+  const paths = asPaths(tiles)
+  var path
 
   t.plan(8)
   t.equal(paths.length, 1, 'number of paths')
@@ -125,8 +126,8 @@ test('overlap all but one', function (t) {
   rightAngles(t, path)
 
   // ensure the path is a loop
-  t.deepEqual(path[0], path[path.length-1])
+  t.deepEqual(path[0], path[path.length - 1])
 
   // check bounding box
-  t.deepEqual(boundingBox(path), { top: 4, left: 4, right: 7, bottom: 6})
+  t.deepEqual(boundingBox(path), { top: 4, left: 4, right: 7, bottom: 6 })
 })
