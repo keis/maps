@@ -1,5 +1,5 @@
 import test from 'tape'
-import { clear, brush, reduce } from '../../lib/map'
+import { clear, brush, setForeground, reduce } from '../../lib/map'
 
 test('brush adds a tile', function (t) {
   const state = reduce(void 0, brush(2, 4))
@@ -21,4 +21,11 @@ test('clear removes a tile', function (t) {
 
   t.plan(1)
   t.deepEqual(state, {tiles: [{x: 3, y: 4}]})
+})
+
+test('updates the selected color', function (t) {
+  const state = reduce(null, setForeground('red'))
+
+  t.plan(1)
+  t.deepEqual(state, {color: 'red'})
 })

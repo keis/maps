@@ -10,7 +10,7 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react'
 import { reduce } from './lib/map'
 import storage, { storedState } from './lib/storage'
 
-const init = storedState() || []
+const init = storedState()
 const store = applyMiddleware(thunk, storage)(devTools()(createStore))(reduce, init)
 
 React.render(
