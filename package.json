@@ -2,7 +2,7 @@
   "scripts": {
     "lint": "standard",
     "test": "babel-tape-runner test/**/test.*.js",
-    "coverage": "istanbul cover babel-tape-runner test/**/test.*.js",
+    "coverage": "istanbul cover ./node_modules/babel-tape-runner/bin/babel-tape-runner test/**/test.*.js",
     "billom": "billom package.json \"$npm_package_name\" > package.html",
     "start": "webpack-dev-server"
   },
