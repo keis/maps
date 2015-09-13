@@ -1,6 +1,6 @@
 import test from 'tape'
 import getBounds from 'bound-points'
-import asPaths from '../../lib/path'
+import asPaths from '../../lib/containers/editor/path'
 
 function rightAngles (t, nodes) {
   var prev = nodes[0]
