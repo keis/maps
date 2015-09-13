@@ -1,17 +1,23 @@
 import 'babel-core/lib/polyfill'
 
 import React from 'react'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
-import Editor from './lib/editor'
 import { devTools } from 'redux-devtools'
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react'
-import { reduce } from './lib/map'
-import storage, { storedState } from './lib/storage'
+
+import Editor from './lib/containers/editor'
+import storage, { storedState } from './lib/middlewares/storage'
+import color from './lib/reducers/color'
+import tiles from './lib/reducers/tiles'
 
 const init = storedState()
-const store = applyMiddleware(thunk, storage)(devTools()(createStore))(reduce, init)
+const reducer = combineReducers({
+  color,
+  tiles
+})
+const store = applyMiddleware(thunk, storage)(devTools()(createStore))(reducer, init)
 
 React.render(
   React.createElement(
