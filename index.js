@@ -15,12 +15,12 @@ const init = storedState()
 const store = applyMiddleware(thunk, storage)(devTools()(createStore))(reducer, init)
 
 React.render(
-  React.createElement(
-    'div', null,
-    React.createElement(Provider, {store},
-                        () => React.createElement(Editor)),
-    React.createElement(DebugPanel, {top: true, right: true, bottom: true},
-                        React.createElement(DevTools,
-                                            {store, monitor: LogMonitor}))
-  ),
+  <div>
+    <Provider store={store}>
+      {() => <Editor/>}
+    </Provider>
+    <DebugPanel top right bottom>
+      <DevTools store={store} monitor={LogMonitor} />
+    </DebugPanel>
+  </div>,
   document.getElementById('app'))
