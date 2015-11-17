@@ -25,15 +25,18 @@
     "canvas-arrow-path": "^1.0.0",
     "canvas-cave-path": "^1.0.1",
     "component-find": "^1.0.0",
-    "compose-function": "^2.0.0",
+    "compose-function": "^3.0.0",
     "css-loader": "^0.16.0",
     "interact.js": "^1.2.4",
-    "react": "^0.13.3",
-    "react-input-color": "^1.6.0",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-input-color": "^1.7.0",
     "react-redux": "^2.0.0",
     "redux": "^2.0.0",
+    "react-redux": "^4.0.0",
+    "redux": "^3.0.4",
     "redux-devtools": "^2.1.0",
-    "redux-thunk": "^0.1.0",
-    "reselect": "1.0.0"
+    "redux-thunk": "^1.0.0",
+    "reselect": "^2.0.0"
   }
 }
