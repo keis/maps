@@ -25,7 +25,7 @@
     "canvas-arrow-path": "^1.0.0",
     "canvas-cave-path": "^1.0.1",
     "component-find": "^1.0.0",
-    "compose-function": "^2.0.0",
+    "compose-function": "^3.0.0",
     "css-loader": "^0.16.0",
     "interact.js": "^1.2.4",
     "react": "^0.14.0",
