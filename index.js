@@ -17,7 +17,7 @@ const store = applyMiddleware(thunk, storage)(devTools()(createStore))(reducer, 
 React.render(
   <div>
     <Provider store={store}>
-      {() => <Editor/>}
+      <Editor/>
     </Provider>
     <DebugPanel top right bottom>
       <DevTools store={store} monitor={LogMonitor} />
